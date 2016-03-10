@@ -65,13 +65,13 @@
 
 		function requestTrolleys() {
 			if (useMiamiTransitApi) {
-				$.getJSON('https://miami-transit-api.herokuapp.com/tracker.json',
+				$.getJSON('http://trolley-tracker.herokuapp.com/api/trolleys',
 				function(data) {
 					addTrolleys(data.features);
 				}).error(
 					function () {
 						useMiamiTransitApi = false;
-						console.log("Error from Miami Transit API, using backup.");
+						console.log("Error from Node JS API, using backup.");
 					}
 				);
 			} else {
@@ -88,7 +88,7 @@
 			).error(
 				function () {
 					useMiamiTransitApi = true;
-					console.log("Error from backup data source, using Miami Transit API.");
+					console.log("Error from backup data source, using Node JS API.");
 				}
 			);
 		}
@@ -108,7 +108,7 @@
 
 		function addMarker(deviceid, lat, lon, bustime, speed) {
 			var marker = L.marker([lat, lon]).bindPopup(
-			  '<strong>Sweetwater Trolley</strong>'+
+			  '<strong>Node Trolley</strong>'+
 					'<br>Bus ID: ' +  deviceid +
 					'<br>Location: <a target="blank" href="https://maps.google.com?q=' +
 					lat + ',' +  lon + '">' + lat + ',' + lon + '</a>' +
